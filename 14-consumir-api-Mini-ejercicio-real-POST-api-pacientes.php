@@ -53,12 +53,12 @@
 
     // Guardamos el token
     $token = $loginData->result->token;
-    echo "Login exitoso. Token: $token" . PHP_EOL . "<br><br>";;
+    echo "Login exitoso. Token: $token" . PHP_EOL . "<br><br>";
 
 
     /*--------------------- POST pacientes ---------------------*/
 
-    //Endpoint
+    // POST Endpoint
     $urlPost = "https://apirest.pablogaray.com.ar/pacientes.php";
 
     // Definimos el nuevo usuario
@@ -77,7 +77,6 @@
     // Inicializar cURL
     $ch = curl_init($urlPost);
 
-    // Configurar opciones
     // Configuramos las opciones
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
@@ -123,21 +122,19 @@
             exit;
        }
 
-        // Validar que el campo esperado exista
+        // Validar que el campo "pacienteId" exista
         if (!isset($data->result->pacienteId)) {
             echo "La respuesta no contiene la clave 'pacienteId'.";
             exit;
 
         } else {
-            // Recorrer y mostrar datos
+            // Mostramos el json crudo de la respuesta de la api
             echo "<pre>";
             print_r($data);
             echo "</pre>";
+            // Mostramos el dato del usuario almacenado con la respuesta del Id
             echo PHP_EOL . "<br><br>";
             echo "El paciente con el ID: " . $data->result->pacienteId . " ha sido agregado correctamente.<br>";
-            /*foreach ($data as $paciente) {
-                echo "El paciente con el ID: " . $paciente->result->pacienteId . "ha sido agregado correctamente." . PHP_EOL . "<br>";
-            }*/
         }        
 
     } elseif ($httpCode === 401) {
