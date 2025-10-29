@@ -56,11 +56,18 @@
         */
         } else {
             // Recorrer y mostrar datos
+
+            // Mostramos el json crudo de la respuesta de la api
+            /*
+            echo "<pre>";
+            print_r($data);
+            echo "</pre>";
+            */
             foreach ($data as $paciente) {
                 echo "ID: " . $paciente->Paciente_Id . PHP_EOL . "<br>";
                 echo "Nombre: " . $paciente->Nombre . PHP_EOL . "<br>";
-                echo "Mail: " . $paciente->Email . PHP_EOL. "<br>";
-                echo "Fecha de Nacimiento: " . $paciente->Apellido . PHP_EOL. "<br> <br>";
+                echo "Apellido: " . $paciente->Apellido . PHP_EOL . "<br>";
+                echo "Mail: " . $paciente->Email . PHP_EOL. "<br><br>";
             }
         }        
 
