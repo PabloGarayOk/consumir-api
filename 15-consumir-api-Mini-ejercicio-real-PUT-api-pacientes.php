@@ -63,15 +63,15 @@
 
     // Definimos el nuevo usuario
     $editUser = [
-        "pacienteId" => "94",
-        "dni" => "94123456",
-        "nombre" => "Pedro",
-        "apellido" => "Roca",
+        "pacienteId" => "96",
+        "dni" => "14123456",
+        "nombre" => "Mellizo",
+        "apellido" => "Barros Schelotto",
         "genero" => "Mas",
-        "fechaNacimiento" => "2009-05-22",
-        "direccion" => "Arturo M.Bas 682",
-        "tel" => "2942123456",
-        "email" => "pedroroca22@gmail.com",
+        "fechaNacimiento" => "1970-05-22",
+        "direccion" => "Avellaneda 48",
+        "tel" => "115123456",
+        "email" => "elmellizo@gmail.com",
         "token" => "$token" 
     ];
 
@@ -81,7 +81,7 @@
     // Configuramos las opciones
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_PUT => true,
+        CURLOPT_CUSTOMREQUEST => "PUT",
         CURLOPT_POSTFIELDS => json_encode($editUser),
         CURLOPT_HTTPHEADER => [
             "Content-Type: application/json",
@@ -124,19 +124,22 @@
        }
 
         // Validar que el campo "pacienteId" exista
-        if (!isset($data->result->pacienteId)) {
-            echo "La respuesta no contiene la clave 'pacienteId'.";
+        if (!isset($data->result->PacienteId)) {
+            echo "La respuesta no contiene la clave 'PacienteId'.";
             exit;
 
         } else {
             // Mostramos el json crudo de la respuesta de la api
+            /*
+            // Usamos print_r para ver el json entero
             echo "<pre>";
             print_r($data);
             echo "</pre>";
+            */
             // Mostramos el dato del usuario almacenado con la respuesta del Id
             echo PHP_EOL . "<br><br>";
-            echo "El paciente con el ID: " . $data->result->pacienteId . " ha sido editado correctamente.<br>";
-            //echo "Se edito la cantidad de filas: " . $data->result->pacienteId . " de la bbdd.<br>";
+            echo "El paciente con el ID: " . $data->result->PacienteId . " ha sido editado correctamente.<br>";
+            echo "Se edito la cantidad de filas: " . $data->result->{'Filas afectadas'} . " de la bbdd.<br>";
         }        
 
     } elseif ($httpCode === 401) {
