@@ -61,7 +61,7 @@
     // PUT Endpoint
     $urlPut = "https://apirest.pablogaray.com.ar/pacientes.php";
 
-    // Definimos el nuevo usuario
+    // Editamos los datos del usuario
     $editUser = [
         "pacienteId" => "96",
         "dni" => "14123456",
