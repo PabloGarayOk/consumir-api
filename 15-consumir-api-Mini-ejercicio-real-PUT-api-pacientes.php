@@ -146,5 +146,5 @@
         echo "Token inválido o expirado.";
     
     } else {
-        echo "Error HTTP $httpCode: " . $response;
+        echo "Error HTTP $httpCode: " .  htmlspecialchars($response);
     }
