@@ -42,12 +42,17 @@
 
     // Validamos el login
     if ($loginCode !== 200 || !isset($loginData->result->token)) {
-            echo "Error al autenticar. HTTP: $loginCode. Respuesta: " . $loginResponse;
+            echo "Error al autenticar. HTTP: $loginCode. Respuesta: " . htmlspecialchars($loginResponse);
             exit;
     }
 
+    if (empty($loginData)) {
+        echo "Login: respuesta vacía." . PHP_EOL;
+        exit;
+    }
+
     if (!isset($loginData->result->token)) {
-        echo "No se recibió el token.";
+        echo "Login: no se recibió el token. Respuesta: " . htmlspecialchars($loginResponse) . PHP_EOL;
         exit;
     }
 
@@ -63,14 +68,14 @@
 
     // Definimos el nuevo usuario
     $newUser = [
-          "dni" => "999888777",
-          "nombre" => "Juan",
-          "apellido" => "Argentino",
+          "dni" => "44777666",
+          "nombre" => "Eduardo",
+          "apellido" => "Aguirre",
           "genero" => "Mas",
-          "fechaNacimiento" => "1999-10-05",
-          "direccion" => "Calle 13",
-          "tel" => "321654987",
-          "email" => "juanargentino@gmail.com",
+          "fechaNacimiento" => "1980-10-05",
+          "direccion" => "Calazans 1205",
+          "tel" => "321654321",
+          "email" => "eaguirre@gmail.com",
           "token" => "$token" 
     ];
 
