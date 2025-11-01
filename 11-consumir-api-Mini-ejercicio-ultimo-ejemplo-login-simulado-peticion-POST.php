@@ -1,14 +1,80 @@
 <?php
 
-    // ---------- 1 LOGIN SIMULADO ----------
+    // ------------------- 1 LOGIN  -------------------
 
-    // Simulamos que la API nos devolvió un token tras un login exitoso
-    $token = base64_encode('usuario:clave123'); // solo para ejemplo, no es real JWT
+    // Endpoint de autenticación
+    $loginUrl = "https://api.ejemplo.com/login";
 
-    echo "Login simulado. Token generado: $token" . PHP_EOL . PHP_EOL . "<br><br>";
+    // Credenciales del usuario
+    $credentials = [
+        "email" => "pablo@example.com",
+        "password" => "123456"
+    ];
+
+    // Inicializamos cURL para login
+    $ch = curl_init($loginUrl);
+
+    // Configuramos las opciones
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode($credentials),
+        CURLOPT_HTTPHEADER => [
+            "Content-Type: application/json",
+            "User-Agent: MiAplicacionPHP"
+        ],
+        CURLOPT_SSL_VERIFYPEER => true,
+    ]);
+
+    // Ejecutamos la petición de login
+    $loginResponse = curl_exec($ch);
+
+    // Verificamos errores de conexión
+    if (curl_errno($ch)) {
+        echo "Error en la conexión (login): " . curl_error($ch);
+        curl_close($ch);
+        exit;
+    }
+
+    // Obtenemos el código HTTP
+    $loginCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    
+    // Cerramos la peticion
+    curl_close($ch);
+
+    // ---------- 2 MANEJO DE RESPUESTA LOGIN ----------
+
+    // Validamos el login por codigo HTTP
+    if ($loginCode !== 200) {
+        echo "Error al autenticar. HTTP: $loginCode. Respuesta: " . htmlspecialchars($loginResponse) . PHP_EOL;
+        exit;
+    }
+
+    // Decodificamos la respuesta del login
+    $loginData = json_decode($loginResponse);
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        echo "Error decodificando JSON (login): " . json_last_error_msg() . PHP_EOL;
+        exit;
+    }
+    if (empty($loginData)) {
+        echo "Login: respuesta vacía." . PHP_EOL;
+        exit;
+    }
+
+    // Verificamos token
+    if (!isset($loginData['token'])) {
+        echo "Login: no se recibió token. Respuesta: " . htmlspecialchars($loginResponse) . PHP_EOL;
+        exit;
+    }
+
+    // Guardamos el token
+    $token = $loginData->token;
+
+    echo "Login OK. Token: $token" . PHP_EOL;
 
 
-    // ---------- 2 PETICIÓN POST REAL ----------
+    // ------------- 3 PETICIÓN POST REAL -------------
 
     $url = "https://jsonplaceholder.typicode.com/posts";
 
@@ -52,7 +118,7 @@
     curl_close($ch);
 
 
-    // ---------- 3 MANEJO DE RESPUESTA ----------
+    // ---------- 4 MANEJO DE RESPUESTA POST ----------
 
     echo "El Código HTTP es: $httpCode" . PHP_EOL . "<br>";
 
