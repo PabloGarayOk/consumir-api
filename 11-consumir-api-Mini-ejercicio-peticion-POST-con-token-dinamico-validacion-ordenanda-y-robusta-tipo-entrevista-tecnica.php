@@ -76,7 +76,7 @@
 
     // ------------- 3 PETICIÓN POST REAL -------------
 
-    $url = "https://jsonplaceholder.typicode.com/posts";
+    $postUrl = "https://api.ejemplo.com/posts";
 
     // Datos a enviar (simulan un nuevo post o usuario)
     $postData = [
@@ -86,7 +86,7 @@
     ];
 
     // Inicializamos cURL
-    $ch = curl_init($url);
+    $ch = curl_init($postUrl);
 
     // Configuramos las opciones
     curl_setopt_array($ch, [
