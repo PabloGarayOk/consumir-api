@@ -1,5 +1,49 @@
 <?php
 
+    //--------------- LOGICA MODELO ---------------//
+    /*
+    $url = "https://jsonplaceholder.typicode.com/posts";
+    $method = "GET";
+    $maxRetries = 3; // Número máximo de reintentos
+    $retryDelay = 2; // Segundos de espera entre intentos
+    $timeout = 5;    // Timeout en segundos
+
+    for ($attempt = 1; $attempt <= $maxRetries; $attempt++) {
+        echo "Intento $attempt...\n";
+
+        $options = [
+            "http" => [
+                "method"  => $method,
+                "timeout" => $timeout,
+            ]
+        ];
+
+        $context = stream_context_create($options);
+
+        $response = @file_get_contents($url, false, $context);
+
+        if ($response !== false) {
+            echo "Petición exitosa en el intento $attempt\n";
+            break; // Salimos del bucle
+        } else {
+            echo "Falló intento $attempt (esperando $retryDelay s)\n";
+            sleep($retryDelay);
+        }
+    }
+
+    if ($response === false) {
+        echo "Error: no se pudo completar la petición después de $maxRetries intentos.\n";
+    } else {
+        $data = json_decode($response, true);
+        print_r($data);
+    }
+    */
+    //--------------- FIN LOGICA MODELO ---------------//
+    
+
+
+    //------------------ EJERCICIO REAL -------------------//
+    
     // --- CONFIGURACIÓN GENERAL DE TIMEOUT Y REINTENTOS ---
     
     $maxRetries = 3;  // Número máximo de reintentos
