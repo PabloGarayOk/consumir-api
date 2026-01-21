@@ -28,14 +28,12 @@
 
 		- Código limpio:
 
-		Login y POST se reducen a dos simples líneas, sin duplicar nada.
+		Login y POST se reducen a dos simples líneas, sin duplicar nada:
+
+		$loginData = apiRequest('https://api.ejemplo.com/login', 'POST', $credentials);
+		$postData  = apiRequest('https://api.ejemplo.com/posts', 'POST', $data, $token);
+
 	*/
-
-
-	$loginData = apiRequest('https://api.ejemplo.com/login', 'POST', $credentials);
-	$postData  = apiRequest('https://api.ejemplo.com/posts', 'POST', $data, $token);
-
-
 
 	/**
 	 * Realiza una petición HTTP robusta (con cURL, timeouts, reintentos y manejo de JSON).
