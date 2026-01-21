@@ -59,7 +59,7 @@
             $curlError = curl_error($ch);
             curl_close($ch);
 
-            // ⚠Error de conexión (sin respuesta HTTP)
+            // Error de conexión (sin respuesta HTTP)
             if ($curlError) {
                 echo "Error de conexión: $curlError\n";
             }
